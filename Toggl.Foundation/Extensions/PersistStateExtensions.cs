@@ -10,7 +10,7 @@ namespace Toggl.Foundation.Extensions
         internal static ApiExceptionsCatchingPersistState CatchApiExceptions(this IPersistState state)
             => new ApiExceptionsCatchingPersistState(state);
 
-        internal static NoWorkspaceExceptionsThrowingPersistState CatchNoWorkspaceExceptions(this IPersistState state)
+        internal static NoWorkspaceExceptionsThrowingPersistState ThrowNoWorkspaceExceptionIfNeeded(this IPersistState state)
             => new NoWorkspaceExceptionsThrowingPersistState(state);
 
         internal static IPersistState UpdateSince<TInterface, TDatabaseInterface>(this IPersistState state, ISinceParameterRepository sinceParameterRepository)

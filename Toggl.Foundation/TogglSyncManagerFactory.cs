@@ -81,7 +81,7 @@ namespace Toggl.Foundation
             var persistWorkspaces =
                 new PersistListState<IWorkspace, IDatabaseWorkspace, IThreadSafeWorkspace>(dataSource.Workspaces, Workspace.Clean)
                     .UpdateSince<IWorkspace, IDatabaseWorkspace>(database.SinceParameters)
-                    .CatchNoWorkspaceExceptions()
+                    .ThrowNoWorkspaceExceptionIfNeeded()
                     .CatchApiExceptions();
 
             var persistWorkspaceFeatures =
