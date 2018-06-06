@@ -8,12 +8,12 @@ using Toggl.Ultrawave.Exceptions;
 
 namespace Toggl.Foundation.MvvmCross.Services
 {
-    public sealed class ApiErrorHandlingService : IApiErrorHandlingService
+    public sealed class ErrorHandlingService : IErrorHandlingService
     {
         private readonly IMvxNavigationService navigationService;
         private readonly IAccessRestrictionStorage accessRestrictionStorage;
 
-        public ApiErrorHandlingService(
+        public ErrorHandlingService(
             IMvxNavigationService navigationService,
             IAccessRestrictionStorage accessRestrictionStorage)
         {

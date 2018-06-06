@@ -2,7 +2,7 @@
 
 namespace Toggl.Foundation.Services
 {
-    public interface IApiErrorHandlingService
+    public interface IErrorHandlingService
     {
         bool TryHandleDeprecationError(Exception error);
         bool TryHandleUnauthorizedError(Exception error);
