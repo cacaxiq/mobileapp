@@ -14,8 +14,6 @@ namespace Toggl.Foundation.Sync.States
 
         public StateResult<IFetchObservables> FinishedPersisting { get; } = new StateResult<IFetchObservables>();
 
-        public StateResult<Exception> Failed { get; } = new StateResult<Exception>();
-
         public NoWorkspaceExceptionsThrowingPersistState(IPersistState internalState)
         {
             Ensure.Argument.IsNotNull(internalState, nameof(internalState));
@@ -25,16 +23,12 @@ namespace Toggl.Foundation.Sync.States
 
         public IObservable<ITransition> Start(IFetchObservables fetch)
             => fetch.GetList<IWorkspace>()
-                .SelectMany(workspaces => workspaces.Any() 
+                .SelectMany(workspaces => workspaces.Any()
                     ? handlePresenceOfWorkspaces(fetch)
                     : Observable.Throw<ITransition>(new NoWorkspaceException()));
 
         private IObservable<ITransition> handlePresenceOfWorkspaces(IFetchObservables fetch)
             => internalState.Start(fetch)
-                .Select(_ => FinishedPersisting.Transition(fetch))
-                .Catch((Exception exception) => processError(exception));
-
-        private IObservable<ITransition> processError(Exception exception)
-            => Observable.Return(Failed.Transition(exception));
+                .Select(_ => FinishedPersisting.Transition(fetch));
     }
 }
