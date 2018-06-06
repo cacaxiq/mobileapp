@@ -2,6 +2,7 @@
 using MvvmCross.Core.Navigation;
 using Toggl.Foundation.MvvmCross.ViewModels;
 using Toggl.Foundation.Services;
+using Toggl.Foundation.Exceptions;
 using Toggl.Multivac;
 using Toggl.PrimeRadiant.Settings;
 using Toggl.Ultrawave.Exceptions;
@@ -52,6 +53,17 @@ namespace Toggl.Foundation.MvvmCross.Services
                     navigationService.Navigate<TokenResetViewModel>();
                 }
 
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool TryHandleNoWorkspaceError(Exception error)
+        {
+            if (error is NoWorkspaceException)
+            {
+                Console.WriteLine("Show no workspace UI");
                 return true;
             }
 

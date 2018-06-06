@@ -6,5 +6,6 @@ namespace Toggl.Foundation.Services
     {
         bool TryHandleDeprecationError(Exception error);
         bool TryHandleUnauthorizedError(Exception error);
+        bool TryHandleNoWorkspaceError(Exception error);
     }
 }

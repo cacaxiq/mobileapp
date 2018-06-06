@@ -133,7 +133,8 @@ namespace Toggl.Foundation.DataSources
         private void onSyncError(Exception exception)
         {
             if (errorHandlingService.TryHandleDeprecationError(exception)
-                || errorHandlingService.TryHandleUnauthorizedError(exception))
+                || errorHandlingService.TryHandleUnauthorizedError(exception)
+                || errorHandlingService.TryHandleNoWorkspaceError(exception))
             {
                 stopSyncingOnSignal();
                 return;
