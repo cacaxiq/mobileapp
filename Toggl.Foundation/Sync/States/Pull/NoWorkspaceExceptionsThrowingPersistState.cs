@@ -8,7 +8,7 @@ using Toggl.Multivac.Models;
 
 namespace Toggl.Foundation.Sync.States
 {
-    internal sealed class NoWorkspaceExceptionsCatchingPersistState : IPersistState
+    internal sealed class NoWorkspaceExceptionsThrowingPersistState : IPersistState
     {
         private readonly IPersistState internalState;
 
@@ -16,7 +16,7 @@ namespace Toggl.Foundation.Sync.States
 
         public StateResult<Exception> Failed { get; } = new StateResult<Exception>();
 
-        public NoWorkspaceExceptionsCatchingPersistState(IPersistState internalState)
+        public NoWorkspaceExceptionsThrowingPersistState(IPersistState internalState)
         {
             Ensure.Argument.IsNotNull(internalState, nameof(internalState));
 
