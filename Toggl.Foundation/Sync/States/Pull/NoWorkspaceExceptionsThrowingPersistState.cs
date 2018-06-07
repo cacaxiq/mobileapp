@@ -5,6 +5,7 @@ using Toggl.Foundation.Exceptions;
 using Toggl.Foundation.Sync.States.Pull;
 using Toggl.Multivac;
 using Toggl.Multivac.Models;
+using Toggl.Multivac.Extensions;
 
 namespace Toggl.Foundation.Sync.States
 {
@@ -29,6 +30,6 @@ namespace Toggl.Foundation.Sync.States
 
         private IObservable<ITransition> handlePresenceOfWorkspaces(IFetchObservables fetch)
             => internalState.Start(fetch)
-                .Select(_ => FinishedPersisting.Transition(fetch));
+                .Select(FinishedPersisting.Transition(fetch));
     }
 }
