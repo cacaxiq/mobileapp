@@ -30,7 +30,7 @@ namespace Toggl.Foundation.Tests.Sync.States.Pull
         public async Task ReturnsSuccessResultWhenWorkspacesArePresent()
         {
             var arrayWithWorkspace = new List<IWorkspace>(new[] { new MockWorkspace() });
-            fetchObservables.GetList<IWorkspace>().Returns( Observable.Return<List<IWorkspace>>( arrayWithWorkspace ) );
+            fetchObservables.GetList<IWorkspace>().Returns(Observable.Return<List<IWorkspace>>(arrayWithWorkspace));
             var transition = await state.Start(fetchObservables);
 
             transition.Result.Should().Be(state.FinishedPersisting);
