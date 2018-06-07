@@ -41,8 +41,8 @@ namespace Toggl.Foundation.Tests.Sync.States.Pull
         {
             Exception caughtException = null;
 
-            var arrayWithWorkspace = new List<IWorkspace>();
-            fetchObservables.GetList<IWorkspace>().Returns(Observable.Return<List<IWorkspace>>(arrayWithWorkspace));
+            var arrayWithNoWorkspace = new List<IWorkspace>();
+            fetchObservables.GetList<IWorkspace>().Returns(Observable.Return<List<IWorkspace>>(arrayWithNoWorkspace));
 
             try
             {
