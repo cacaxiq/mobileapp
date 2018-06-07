@@ -37,7 +37,7 @@ namespace Toggl.Foundation.Tests.Sync.States.Pull
         }
 
         [Fact]
-        public async void ThrowsWhenExceptionsWhenNoWorkspacesAreAvailable()
+        public async void ThrowsExceptionsWhenNoWorkspacesAreAvailable()
         {
             Exception caughtException = null;
 
