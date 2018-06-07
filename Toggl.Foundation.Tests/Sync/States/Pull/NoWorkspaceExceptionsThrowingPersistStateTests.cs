@@ -36,25 +36,15 @@ namespace Toggl.Foundation.Tests.Sync.States.Pull
             transition.Result.Should().Be(state.FinishedPersisting);
         }
 
-        [Fact]
-        public async void ThrowsExceptionsWhenNoWorkspacesAreAvailable()
+        [Fact, LogIfTooSlow]
+        public void ThrowsExceptionsWhenNoWorkspacesAreAvailable()
         {
-            Exception caughtException = null;
-
             var arrayWithNoWorkspace = new List<IWorkspace>();
             fetchObservables.GetList<IWorkspace>().Returns(Observable.Return<List<IWorkspace>>(arrayWithNoWorkspace));
 
-            try
-            {
-                var transition = await state.Start(fetchObservables);
-            }
-            catch (Exception e)
-            {
-                caughtException = e;
-            }
+            Func<Task> fetchWorkspaces = async () => await state.Start(fetchObservables);
 
-            caughtException.Should().NotBeNull();
-            caughtException.Should().BeAssignableTo<NoWorkspaceException>();
+            fetchWorkspaces.Should().Throw<NoWorkspaceException>();
         }
     }
 }
