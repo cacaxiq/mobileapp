@@ -29,10 +29,12 @@ namespace Toggl.Foundation.DataSources
             => Resolver.ForPreferences.Resolve(first, second);
 
         private IThreadSafePreferences updatedPreferences(IThreadSafePreferences existing, EditPreferencesDTO dto)
-            => Preferences.Builder
-                .FromExisting(existing)
-                .SetFrom(dto)
-                .SetSyncStatus(SyncStatus.SyncNeeded)
-                .Build();
+            => new Preferences(
+                dto.TimeOfDayFormat ?? existing.TimeOfDayFormat,
+                dto.DateFormat ?? existing.DateFormat,
+                dto.DurationFormat ?? existing.DurationFormat,
+                dto.CollapseTimeEntries ?? existing.CollapseTimeEntries,
+                SyncStatus.SyncNeeded
+            );
     }
 }
